@@ -1,0 +1,75 @@
+name: Build macOS Application
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch: # 允许你手动点击按钮触发编译
+
+jobs:
+  build:
+    runs-on: macos-12 # 使用 macOS 12 (Monterey)，兼容性较好
+    # 注意：GitHub 的 macos-latest 目前是 arm64 (M1/M2)，macos-12 是 Intel x64
+    # 如果你想兼容所有 Mac，Intel x64 是比较安全的选择，M芯片可以通过 Rosetta 运行
+
+    steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive # 如果项目包含子模块，必须把它们也拉取下来
+
+    - name: Install Lazarus/FPC
+      uses: gshs/setup-lazarus@v1
+      with:
+        lazarus-version: "3.0" # 或者 "stable"
+        include-packages: "LazOpenGLContext" # MRIcroGL 依赖 OpenGL
+
+    - name: Compile Project
+      run: |
+        # 这里的 MRIcroGL.lpi 必须和你上传的项目文件名完全一致！大小写敏感！
+        # --os=darwin 表示目标是 Mac
+        # --ws=cocoa 表示使用原生 Cocoa 界面
+        # --cpu=x86_64 强制编译为 Intel 架构 (M芯片也能跑)
+        lazbuild MRIcroGL.lpi --os=darwin --ws=cocoa --cpu=x86_64 --build-mode=Default
+
+    - name: Create App Bundle Structure
+      run: |
+        # Lazarus 编译出来通常只是一个二进制文件，我们需要手动把它包装成 .app
+        # 创建标准的 Mac App 目录结构
+        mkdir -p MRIcroGL.app/Contents/MacOS
+        mkdir -p MRIcroGL.app/Contents/Resources
+        
+        # 将编译好的可执行文件移动进去 (名字通常是 MRIcroGL)
+        mv MRIcroGL MRIcroGL.app/Contents/MacOS/
+        
+        # 复制必要的资源文件 (如果有的话，比如 .py 脚本, .glsl 着色器等)
+        # 假设你的资源在项目根目录，根据实际情况调整：
+        # cp -r Resources/* MRIcroGL.app/Contents/Resources/ || true
+        # cp *.py MRIcroGL.app/Contents/Resources/ || true
+        
+        # 创建一个简单的 Info.plist (这一步为了让 Mac 识别它是个 App)
+        echo '<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+        <plist version="1.0">
+        <dict>
+            <key>CFBundleExecutable</key>
+            <string>MRIcroGL</string>
+            <key>CFBundleIconFile</key>
+            <string>MRIcroGL.icns</string>
+            <key>CFBundleIdentifier</key>
+            <string>com.mricrogl.app</string>
+            <key>CFBundleName</key>
+            <string>MRIcroGL</string>
+            <key>CFBundlePackageType</key>
+            <string>APPL</string>
+            <key>CFBundleShortVersionString</key>
+            <string>1.0</string>
+            <key>NSHighResolutionCapable</key>
+            <true/>
+        </dict>
+        </plist>' > MRIcroGL.app/Contents/Info.plist
+
+    - name: Upload Artifact (Downloadable Zip)
+      uses: actions/upload-artifact@v4
+      with:
+        name: MRIcroGL-Mac-App
+        path: MRIcroGL.app
