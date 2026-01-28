@@ -1,0 +1,2952 @@
+object GLForm1: TGLForm1
+  Left = 734
+  Height = 1988
+  Top = 601
+  Width = 2805
+  AllowDropFiles = True
+  Caption = 'MRIcroGL'
+  ClientHeight = 1988
+  ClientWidth = 2805
+  Constraints.MinHeight = 35
+  Constraints.MinWidth = 35
+  DesignTimePPI = 168
+  Menu = MainMenu
+  Position = poScreenCenter
+  LCLVersion = '4.4.0.0'
+  OnChangeBounds = FormChangeBounds
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnDropFiles = FormDropFiles
+  OnResize = FormResize
+  OnShortCut = FormShortCut
+  OnShow = FormShow
+  object TopPanel: TPanel
+    Left = 0
+    Height = 1838
+    Top = 0
+    Width = 2805
+    Align = alClient
+    ClientHeight = 1838
+    ClientWidth = 2805
+    ParentFont = False
+    TabOrder = 0
+    object ToolPanel: TScrollBox
+      Left = 1
+      Height = 1836
+      Top = 1
+      Width = 450
+      HorzScrollBar.Page = 1
+      HorzScrollBar.Visible = False
+      VertScrollBar.Page = 1836
+      Align = alLeft
+      BorderStyle = bsNone
+      ClientHeight = 1836
+      ClientWidth = 420
+      ParentFont = False
+      TabOrder = 0
+      OnClick = ToolPanelClick
+      OnDblClick = ToolPanelDblClick
+      object LayerBox: TGroupBox
+        Left = 0
+        Height = 391
+        Top = 0
+        Width = 420
+        Align = alTop
+        AutoSize = True
+        Caption = 'Layers'
+        ClientHeight = 358
+        ClientWidth = 416
+        Constraints.MinWidth = 18
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        OnClick = LayerBoxClick
+        object LayerList: TCheckListBox
+          Left = 0
+          Height = 126
+          Hint = 'Right-click for options'
+          Top = 0
+          Width = 416
+          Align = alTop
+          Constraints.MaxHeight = 126
+          ItemHeight = 0
+          ParentFont = False
+          ParentShowHint = False
+          PopupMenu = LayerPopup
+          ShowHint = True
+          TabOrder = 0
+          OnClickCheck = LayerListClickCheck
+          OnSelectionChange = LayerListSelectionChange
+          OnShowHint = LayerListShowHint
+        end
+        object LayerDarkLabel: TLabel
+          AnchorSideLeft.Control = LayerList
+          AnchorSideTop.Control = LayerDarkEdit
+          AnchorSideTop.Side = asrCenter
+          Left = 0
+          Height = 28
+          Top = 180
+          Width = 77
+          Caption = 'Darkest'
+          ParentFont = False
+          OnClick = LayerResetBrightnessMenuClick
+        end
+        object LayerDarkEdit: TEdit
+          AnchorSideLeft.Control = LayerBox
+          AnchorSideTop.Control = LayerColorDrop
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 36
+          Top = 176
+          Width = 203
+          BorderSpacing.Left = 214
+          BorderSpacing.Top = 7
+          ParentFont = False
+          TabOrder = 3
+          Text = '20'
+          OnChange = LayerContrastChange
+          OnKeyUp = LayerContrastKeyUp
+        end
+        object LayerBrightEdit: TEdit
+          AnchorSideLeft.Control = LayerBox
+          AnchorSideTop.Control = LayerDarkEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 36
+          Top = 216
+          Width = 203
+          BorderSpacing.Left = 214
+          BorderSpacing.Top = 4
+          ParentFont = False
+          TabOrder = 4
+          Text = '80'
+          OnChange = LayerContrastChange
+          OnKeyUp = LayerContrastKeyUp
+        end
+        object LayerBrightLabel: TLabel
+          AnchorSideLeft.Control = LayerList
+          AnchorSideTop.Control = LayerBrightEdit
+          AnchorSideTop.Side = asrCenter
+          Left = 0
+          Height = 28
+          Top = 220
+          Width = 91
+          Caption = 'Brightest'
+          ParentFont = False
+          OnClick = LayerResetBrightnessMenuClick
+        end
+        object LayerColorDrop: TComboBox
+          AnchorSideLeft.Control = LayerList
+          AnchorSideTop.Control = LayerList
+          AnchorSideTop.Side = asrBottom
+          Left = 0
+          Height = 36
+          Top = 133
+          Width = 240
+          BorderSpacing.Top = 7
+          ItemHeight = 28
+          ItemIndex = 0
+          Items.Strings = (
+            'Grayscale'
+          )
+          ParentFont = False
+          Style = csDropDownList
+          TabOrder = 1
+          Text = 'Grayscale'
+          OnChange = LayerWidgetChange
+        end
+        object LayerAlphaLabel: TLabel
+          AnchorSideLeft.Control = LayerList
+          AnchorSideTop.Control = LayerAlphaTrack
+          AnchorSideTop.Side = asrCenter
+          Left = 0
+          Height = 28
+          Top = 268
+          Width = 78
+          Caption = 'Opacity'
+          ParentFont = False
+        end
+        object LayerAlphaTrack: TTrackBar
+          AnchorSideLeft.Control = LayerBox
+          AnchorSideTop.Control = LayerBrightEdit
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 52
+          Top = 256
+          Width = 203
+          Max = 100
+          Position = 94
+          TickStyle = tsNone
+          BorderSpacing.Left = 214
+          BorderSpacing.Top = 4
+          ParentFont = False
+          TabOrder = 5
+          OnMouseUp = LayerAlphaTrackMouseUp
+        end
+        object LayerOptionsBtn: TButton
+          AnchorSideLeft.Control = LayerColorDrop
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = LayerColorDrop
+          AnchorSideTop.Side = asrCenter
+          AnchorSideRight.Control = LayerList
+          AnchorSideRight.Side = asrBottom
+          Left = 250
+          Height = 44
+          Top = 129
+          Width = 154
+          BorderSpacing.Left = 10
+          Caption = 'Options'
+          ParentFont = False
+          TabOrder = 2
+          OnClick = LayerOptionsBtnClick
+        end
+        object LayerAfniBtn: TButton
+          AnchorSideLeft.Control = LayerColorDrop
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = LayerAfniDrop
+          AnchorSideTop.Side = asrCenter
+          AnchorSideRight.Control = LayerList
+          AnchorSideRight.Side = asrBottom
+          Left = 250
+          Height = 44
+          Top = 314
+          Width = 154
+          BorderSpacing.Left = 10
+          BorderSpacing.Top = 7
+          Caption = '...'
+          ParentFont = False
+          TabOrder = 6
+          Visible = False
+          OnClick = LayerAfniBtnClick
+        end
+        object LayerAfniDrop: TComboBox
+          AnchorSideLeft.Control = LayerList
+          AnchorSideTop.Control = LayerAlphaTrack
+          AnchorSideTop.Side = asrBottom
+          Left = 0
+          Height = 36
+          Top = 318
+          Width = 240
+          BorderSpacing.Top = 10
+          ItemHeight = 28
+          ItemIndex = 0
+          Items.Strings = (
+            'AFNI'
+            'F'
+            'N'
+            'I'
+          )
+          ParentFont = False
+          Style = csDropDownList
+          TabOrder = 7
+          Text = 'AFNI'
+          Visible = False
+          OnClick = LayerAfniDropClick
+        end
+      end
+      object ClipBox: TGroupBox
+        Left = 0
+        Height = 253
+        Hint = 'Set clip plane'
+        Top = 391
+        Width = 420
+        Align = alTop
+        AutoSize = True
+        Caption = 'Clipping'
+        ClientHeight = 220
+        ClientWidth = 416
+        Constraints.MinWidth = 18
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+        object ClipDepthLabel: TLabel
+          AnchorSideLeft.Control = ClipBox
+          AnchorSideTop.Control = ClipDepthTrack
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 12
+          Width = 62
+          BorderSpacing.Left = 4
+          Caption = 'Depth'
+          ParentFont = False
+          OnClick = ClipLabelClick
+        end
+        object ClipDepthTrack: TTrackBar
+          AnchorSideLeft.Control = ClipBox
+          AnchorSideRight.Control = ClipBox
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 52
+          Top = 0
+          Width = 203
+          Max = 999
+          Position = 0
+          TickStyle = tsNone
+          OnChange = UpdateShaderSettings
+          BorderSpacing.Left = 214
+          BorderSpacing.Right = 4
+          ParentFont = False
+          TabOrder = 0
+        end
+        object ClipAziTrack: TTrackBar
+          AnchorSideLeft.Control = ClipDepthTrack
+          AnchorSideTop.Control = ClipDepthTrack
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = ClipDepthTrack
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 52
+          Top = 56
+          Width = 199
+          Max = 360
+          Position = 180
+          TickStyle = tsNone
+          OnChange = UpdateShaderSettings
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Top = 4
+          BorderSpacing.Right = 4
+          ParentFont = False
+          TabOrder = 1
+        end
+        object ClipAziLabel: TLabel
+          Tag = 1
+          AnchorSideLeft.Control = ClipBox
+          AnchorSideTop.Control = ClipAziTrack
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 68
+          Width = 85
+          BorderSpacing.Left = 4
+          Caption = 'Azimuth'
+          ParentFont = False
+          OnClick = ClipLabelClick
+        end
+        object ClipElevTrack: TTrackBar
+          AnchorSideLeft.Control = ClipDepthTrack
+          AnchorSideTop.Control = ClipAziTrack
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = ClipDepthTrack
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 52
+          Top = 112
+          Width = 199
+          Max = 180
+          Min = -180
+          Position = 6
+          TickStyle = tsNone
+          OnChange = UpdateShaderSettings
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Top = 4
+          BorderSpacing.Right = 4
+          ParentFont = False
+          TabOrder = 2
+        end
+        object ClipElevLabel: TLabel
+          Tag = 2
+          AnchorSideLeft.Control = ClipBox
+          AnchorSideTop.Control = ClipElevTrack
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 124
+          Width = 93
+          BorderSpacing.Left = 4
+          Caption = 'Elevation'
+          ParentFont = False
+          OnClick = ClipLabelClick
+        end
+        object ClipThickTrack: TTrackBar
+          AnchorSideLeft.Control = ClipDepthTrack
+          AnchorSideTop.Control = ClipElevTrack
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = ClipDepthTrack
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 52
+          Top = 168
+          Width = 199
+          Max = 1000
+          Position = 1000
+          TickStyle = tsNone
+          OnChange = UpdateShaderSettings
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Top = 4
+          BorderSpacing.Right = 4
+          ParentFont = False
+          TabOrder = 3
+        end
+        object ClipThickLabel: TLabel
+          Tag = 3
+          AnchorSideLeft.Control = ClipBox
+          AnchorSideTop.Control = ClipThickTrack
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 180
+          Width = 98
+          BorderSpacing.Left = 4
+          Caption = 'Thickness'
+          ParentFont = False
+          OnClick = ClipLabelClick
+        end
+      end
+      object ShaderBox: TGroupBox
+        Left = 0
+        Height = 677
+        Top = 2115
+        Width = 420
+        Align = alClient
+        AutoSize = True
+        Caption = 'Render'
+        ClientHeight = 644
+        ClientWidth = 416
+        Constraints.MinWidth = 18
+        ParentFont = False
+        TabOrder = 2
+        object LightLabel: TLabel
+          AnchorSideLeft.Control = ShaderBox
+          AnchorSideTop.Control = ShaderDrop
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = LightElevTrack
+          Left = 4
+          Height = 28
+          Hint = 'Set location of light source (e.g. above, below, left, right)'
+          Top = 50
+          Width = 51
+          BorderSpacing.Left = 4
+          BorderSpacing.Top = 10
+          Caption = 'Light'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object ShaderDrop: TComboBox
+          AnchorSideLeft.Control = ShaderBox
+          AnchorSideTop.Control = ShaderBox
+          Left = 4
+          Height = 36
+          Top = 4
+          Width = 231
+          BorderSpacing.Left = 4
+          BorderSpacing.Top = 4
+          ItemHeight = 28
+          ParentFont = False
+          Style = csDropDownList
+          TabOrder = 0
+          OnChange = ShaderDropChange
+        end
+        object QLabel: TLabel
+          AnchorSideLeft.Control = ShaderDrop
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = QualityTrack
+          AnchorSideTop.Side = asrCenter
+          Left = 249
+          Height = 28
+          Hint = 'Render quality: higher values are slower but look better'
+          Top = 16
+          Width = 17
+          BorderSpacing.Left = 14
+          BorderSpacing.Right = 7
+          Caption = 'Q'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object QualityTrack: TTrackBar
+          AnchorSideLeft.Control = QLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = ShaderBox
+          AnchorSideRight.Side = asrBottom
+          Left = 273
+          Height = 52
+          Hint = 'Render quality: higher values are slower but look better. Smallest value is dynamic: initially poor quality with high quality after pause.'
+          Top = 4
+          Width = 140
+          Max = 5
+          Position = 0
+          TickStyle = tsNone
+          OnChange = UpdateShaderSettings
+          BorderSpacing.Left = 7
+          BorderSpacing.Top = 4
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 1
+        end
+        object LightElevTrack: TTrackBar
+          AnchorSideLeft.Control = LightLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = LightLabel
+          AnchorSideTop.Side = asrCenter
+          AnchorSideRight.Control = LightAziTrack
+          Left = 62
+          Height = 52
+          Top = 38
+          Width = 140
+          Max = 90
+          Min = -90
+          Position = 45
+          TickStyle = tsNone
+          OnChange = UpdateShaderSettings
+          BorderSpacing.Left = 7
+          BorderSpacing.Right = 7
+          ParentFont = False
+          TabOrder = 2
+        end
+        object LightAziTrack: TTrackBar
+          AnchorSideLeft.Control = LightElevTrack
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = LightLabel
+          AnchorSideTop.Side = asrCenter
+          AnchorSideRight.Control = ShaderBox
+          AnchorSideRight.Side = asrBottom
+          Left = 212
+          Height = 52
+          Top = 38
+          Width = 140
+          Max = 180
+          Min = -180
+          Position = 0
+          TickStyle = tsNone
+          OnChange = UpdateShaderSettings
+          BorderSpacing.Left = 10
+          BorderSpacing.Right = 4
+          ParentFont = False
+          TabOrder = 3
+        end
+        object S1Label: TLabel
+          Tag = 1
+          AnchorSideLeft.Control = ShaderBox
+          AnchorSideTop.Control = S1Track
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 100
+          Width = 25
+          BorderSpacing.Left = 4
+          Caption = 'o1'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object S1Track: TTrackBar
+          Tag = 1
+          AnchorSideLeft.Control = ShaderBox
+          AnchorSideTop.Control = LightLabel
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = ShaderBox
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 52
+          Top = 88
+          Width = 203
+          Max = 100
+          Position = 0
+          TickStyle = tsNone
+          OnChange = PrefTrackChange
+          BorderSpacing.Left = 214
+          BorderSpacing.Top = 10
+          BorderSpacing.Right = 4
+          ParentFont = False
+          TabOrder = 4
+          Visible = False
+        end
+        object S2Label: TLabel
+          Tag = 2
+          AnchorSideLeft.Control = ShaderBox
+          AnchorSideTop.Control = S2Track
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 156
+          Width = 25
+          BorderSpacing.Left = 4
+          Caption = 'o2'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object S2Track: TTrackBar
+          Tag = 2
+          AnchorSideLeft.Control = S1Track
+          AnchorSideTop.Control = S1Track
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = ShaderBox
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 52
+          Top = 144
+          Width = 203
+          Max = 100
+          Position = 0
+          TickStyle = tsNone
+          OnChange = PrefTrackChange
+          BorderSpacing.Top = 4
+          BorderSpacing.Right = 4
+          ParentFont = False
+          TabOrder = 5
+          Visible = False
+        end
+        object S3Label: TLabel
+          Tag = 3
+          AnchorSideLeft.Control = ShaderBox
+          AnchorSideTop.Control = S3Track
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 212
+          Width = 25
+          BorderSpacing.Left = 4
+          Caption = 'o3'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object S3Track: TTrackBar
+          Tag = 3
+          AnchorSideLeft.Control = S1Track
+          AnchorSideTop.Control = S2Track
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = ShaderBox
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 52
+          Top = 200
+          Width = 206
+          Max = 100
+          Position = 0
+          TickStyle = tsNone
+          OnChange = PrefTrackChange
+          BorderSpacing.Top = 4
+          BorderSpacing.Right = 4
+          ParentFont = False
+          TabOrder = 6
+          Visible = False
+        end
+        object S4Label: TLabel
+          Tag = 4
+          AnchorSideLeft.Control = ShaderBox
+          AnchorSideTop.Control = S4Track
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 268
+          Width = 25
+          BorderSpacing.Left = 4
+          Caption = 'o4'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object S4Track: TTrackBar
+          Tag = 4
+          AnchorSideLeft.Control = S1Track
+          AnchorSideTop.Control = S3Track
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = ShaderBox
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 52
+          Top = 256
+          Width = 206
+          Max = 100
+          Position = 0
+          TickStyle = tsNone
+          OnChange = PrefTrackChange
+          BorderSpacing.Top = 4
+          BorderSpacing.Right = 4
+          ParentFont = False
+          TabOrder = 7
+          Visible = False
+        end
+        object S5Label: TLabel
+          Tag = 5
+          AnchorSideLeft.Control = ShaderBox
+          AnchorSideTop.Control = S5Track
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 324
+          Width = 25
+          BorderSpacing.Left = 4
+          Caption = 'o5'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object S5Track: TTrackBar
+          Tag = 5
+          AnchorSideLeft.Control = S1Track
+          AnchorSideTop.Control = S4Track
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = ShaderBox
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 52
+          Top = 312
+          Width = 206
+          Max = 100
+          Position = 0
+          TickStyle = tsNone
+          OnChange = PrefTrackChange
+          BorderSpacing.Top = 4
+          BorderSpacing.Right = 4
+          ParentFont = False
+          TabOrder = 8
+          Visible = False
+        end
+        object S6Label: TLabel
+          Tag = 6
+          AnchorSideLeft.Control = ShaderBox
+          AnchorSideTop.Control = S6Track
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 380
+          Width = 25
+          BorderSpacing.Left = 4
+          Caption = 'o6'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object S6Track: TTrackBar
+          Tag = 6
+          AnchorSideLeft.Control = S1Track
+          AnchorSideTop.Control = S5Track
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = ShaderBox
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 52
+          Top = 368
+          Width = 206
+          Max = 100
+          Position = 0
+          TickStyle = tsNone
+          OnChange = PrefTrackChange
+          BorderSpacing.Top = 4
+          BorderSpacing.Right = 4
+          ParentFont = False
+          TabOrder = 9
+          Visible = False
+        end
+        object S7Label: TLabel
+          Tag = 7
+          AnchorSideLeft.Control = ShaderBox
+          AnchorSideTop.Control = S7Track
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 436
+          Width = 25
+          BorderSpacing.Left = 4
+          Caption = 'o7'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object S7Track: TTrackBar
+          Tag = 7
+          AnchorSideLeft.Control = S1Track
+          AnchorSideTop.Control = S6Track
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = ShaderBox
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 52
+          Top = 424
+          Width = 206
+          Max = 100
+          Position = 0
+          TickStyle = tsNone
+          OnChange = PrefTrackChange
+          BorderSpacing.Top = 4
+          BorderSpacing.Right = 4
+          ParentFont = False
+          TabOrder = 10
+          Visible = False
+        end
+        object S8Label: TLabel
+          Tag = 8
+          AnchorSideLeft.Control = ShaderBox
+          AnchorSideTop.Control = S8Track
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 492
+          Width = 25
+          BorderSpacing.Left = 4
+          Caption = 'o8'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object S8Track: TTrackBar
+          Tag = 8
+          AnchorSideLeft.Control = S1Track
+          AnchorSideTop.Control = S7Track
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = ShaderBox
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 52
+          Top = 480
+          Width = 206
+          Max = 100
+          Position = 0
+          TickStyle = tsNone
+          OnChange = PrefTrackChange
+          BorderSpacing.Top = 4
+          BorderSpacing.Right = 4
+          ParentFont = False
+          TabOrder = 11
+          Visible = False
+        end
+        object S9Label: TLabel
+          Tag = 9
+          AnchorSideLeft.Control = ShaderBox
+          AnchorSideTop.Control = S9Track
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 548
+          Width = 25
+          BorderSpacing.Left = 4
+          Caption = 'o9'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object S9Track: TTrackBar
+          Tag = 9
+          AnchorSideLeft.Control = S1Track
+          AnchorSideTop.Control = S8Track
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = ShaderBox
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 52
+          Top = 536
+          Width = 206
+          Max = 100
+          Position = 0
+          TickStyle = tsNone
+          OnChange = PrefTrackChange
+          BorderSpacing.Top = 4
+          BorderSpacing.Right = 4
+          ParentFont = False
+          TabOrder = 12
+          Visible = False
+        end
+        object S10Label: TLabel
+          Tag = 10
+          AnchorSideLeft.Control = ShaderBox
+          AnchorSideTop.Control = S10Track
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 604
+          Width = 37
+          BorderSpacing.Left = 4
+          Caption = 'o10'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object S10Track: TTrackBar
+          Tag = 10
+          AnchorSideLeft.Control = S1Track
+          AnchorSideTop.Control = S9Track
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = ShaderBox
+          AnchorSideRight.Side = asrBottom
+          Left = 214
+          Height = 52
+          Top = 592
+          Width = 206
+          Max = 100
+          Position = 0
+          TickStyle = tsNone
+          OnChange = PrefTrackChange
+          BorderSpacing.Top = 4
+          BorderSpacing.Right = 4
+          ParentFont = False
+          TabOrder = 13
+          Visible = False
+        end
+        object MatCapDrop: TComboBox
+          AnchorSideLeft.Control = LightLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = LightLabel
+          AnchorSideTop.Side = asrCenter
+          Left = 59
+          Height = 36
+          Top = 46
+          Width = 175
+          BorderSpacing.Left = 4
+          ItemHeight = 28
+          ParentFont = False
+          Style = csDropDownList
+          TabOrder = 14
+          Visible = False
+          OnChange = MatCapDropChange
+        end
+        object MatCapDrop2: TComboBox
+          AnchorSideLeft.Control = MatCapDrop
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = LightLabel
+          AnchorSideTop.Side = asrCenter
+          Left = 241
+          Height = 36
+          Top = 46
+          Width = 175
+          BorderSpacing.Left = 7
+          ItemHeight = 28
+          ParentFont = False
+          Style = csDropDownList
+          TabOrder = 15
+          Visible = False
+          OnChange = MatCapDrop2Change
+        end
+      end
+      object LineBox: TGroupBox
+        Left = 0
+        Height = 80
+        Top = 644
+        Width = 420
+        Align = alTop
+        AutoSize = True
+        Caption = 'Lines'
+        ClientHeight = 47
+        ClientWidth = 416
+        Constraints.MinWidth = 18
+        ParentFont = False
+        TabOrder = 3
+        object LineWidthLabel: TLabel
+          AnchorSideLeft.Control = LineBox
+          AnchorSideTop.Control = LineWidthEdit
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 8
+          Width = 61
+          BorderSpacing.Left = 4
+          Caption = 'Width'
+          ParentFont = False
+        end
+        object LineWidthEdit: TSpinEdit
+          AnchorSideLeft.Control = LineWidthLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = LineBox
+          Left = 69
+          Height = 36
+          Top = 4
+          Width = 144
+          BorderSpacing.Left = 4
+          BorderSpacing.Top = 4
+          MaxValue = 9
+          ParentFont = False
+          TabOrder = 0
+          Value = 1
+          OnChange = LineWidthEditChange
+        end
+        object LineColorBtn: TButton
+          AnchorSideLeft.Control = LineWidthEdit
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = LineWidthEdit
+          AnchorSideTop.Side = asrCenter
+          Left = 217
+          Height = 49
+          Top = -2
+          Width = 144
+          BorderSpacing.Left = 4
+          Caption = 'Color'
+          ParentFont = False
+          TabOrder = 1
+          OnClick = LineColorBtnClick
+        end
+      end
+      object SliceBox: TGroupBox
+        Left = 0
+        Height = 339
+        Top = 1242
+        Width = 420
+        Align = alTop
+        AutoSize = True
+        Caption = '2D Slice Selection'
+        ClientHeight = 306
+        ClientWidth = 416
+        Constraints.MinWidth = 18
+        ParentFont = False
+        TabOrder = 8
+        object SliceABtn: TButton
+          Tag = 3
+          AnchorSideLeft.Control = SliceLBtn
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = SliceBox
+          Left = 82
+          Height = 44
+          Top = 4
+          Width = 74
+          BorderSpacing.Left = 4
+          BorderSpacing.Top = 4
+          Caption = 'A'
+          ParentFont = False
+          TabOrder = 1
+          OnClick = OrientBtnClick
+        end
+        object SlicePBtn: TButton
+          Tag = 2
+          AnchorSideLeft.Control = SliceABtn
+          AnchorSideTop.Control = SliceABtn
+          AnchorSideTop.Side = asrBottom
+          Left = 82
+          Height = 44
+          Top = 52
+          Width = 74
+          BorderSpacing.Top = 4
+          Caption = 'P'
+          ParentFont = False
+          TabOrder = 2
+          OnClick = OrientBtnClick
+        end
+        object SliceSBtn: TButton
+          Tag = 5
+          AnchorSideLeft.Control = SliceRBtn
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = SliceBox
+          Left = 286
+          Height = 44
+          Top = 4
+          Width = 74
+          BorderSpacing.Left = 52
+          BorderSpacing.Top = 4
+          Caption = 'S'
+          ParentFont = False
+          TabOrder = 4
+          OnClick = OrientBtnClick
+        end
+        object SliceIBtn: TButton
+          Tag = 4
+          AnchorSideLeft.Control = SliceSBtn
+          AnchorSideTop.Control = SliceSBtn
+          AnchorSideTop.Side = asrBottom
+          Left = 286
+          Height = 44
+          Top = 52
+          Width = 74
+          BorderSpacing.Top = 4
+          Caption = 'I'
+          ParentFont = False
+          TabOrder = 5
+          OnClick = OrientBtnClick
+        end
+        object SliceLBtn: TButton
+          AnchorSideLeft.Control = SliceBox
+          AnchorSideTop.Control = SliceABtn
+          Left = 4
+          Height = 44
+          Top = 28
+          Width = 74
+          BorderSpacing.Left = 4
+          BorderSpacing.Top = 24
+          Caption = 'L'
+          ParentFont = False
+          TabOrder = 0
+          OnClick = OrientBtnClick
+        end
+        object SliceRBtn: TButton
+          Tag = 1
+          AnchorSideLeft.Control = SliceABtn
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = SliceLBtn
+          AnchorSideTop.Side = asrCenter
+          Left = 160
+          Height = 44
+          Top = 28
+          Width = 74
+          BorderSpacing.Left = 4
+          Caption = 'R'
+          ParentFont = False
+          TabOrder = 3
+          OnClick = OrientBtnClick
+        end
+        object XCoordEdit: TEdit
+          AnchorSideLeft.Control = SliceBox
+          AnchorSideTop.Control = CoordLabel
+          AnchorSideTop.Side = asrBottom
+          Left = 4
+          Height = 36
+          Top = 132
+          Width = 133
+          BorderSpacing.Left = 4
+          BorderSpacing.Top = 4
+          ParentFont = False
+          TabOrder = 6
+          Text = '0'
+          OnChange = CoordEditChange
+        end
+        object CoordLabel: TLabel
+          AnchorSideLeft.Control = SliceBox
+          AnchorSideTop.Control = SlicePBtn
+          AnchorSideTop.Side = asrBottom
+          Left = 4
+          Height = 28
+          Top = 100
+          Width = 192
+          BorderSpacing.Left = 4
+          BorderSpacing.Top = 4
+          Caption = 'Coordinates (X,Y,Z)'
+          ParentFont = False
+        end
+        object YCoordEdit: TEdit
+          AnchorSideLeft.Control = XCoordEdit
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = XCoordEdit
+          AnchorSideTop.Side = asrCenter
+          Left = 141
+          Height = 36
+          Top = 132
+          Width = 133
+          BorderSpacing.Left = 4
+          ParentFont = False
+          TabOrder = 7
+          Text = '0'
+          OnChange = CoordEditChange
+        end
+        object ZCoordEdit: TEdit
+          AnchorSideLeft.Control = YCoordEdit
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = XCoordEdit
+          AnchorSideTop.Side = asrCenter
+          Left = 278
+          Height = 36
+          Top = 132
+          Width = 133
+          BorderSpacing.Left = 4
+          ParentFont = False
+          TabOrder = 8
+          Text = '0'
+          OnChange = CoordEditChange
+        end
+        object AnatDrop: TComboBox
+          AnchorSideLeft.Control = SliceBox
+          AnchorSideTop.Control = XCoordEdit
+          AnchorSideTop.Side = asrBottom
+          Left = 4
+          Height = 36
+          Top = 172
+          Width = 427
+          BorderSpacing.Left = 4
+          BorderSpacing.Top = 4
+          ItemHeight = 28
+          ParentFont = False
+          Style = csDropDownList
+          TabOrder = 9
+          OnChange = AnatDropChange
+        end
+        object SliceZoom: TTrackBar
+          AnchorSideLeft.Control = SliceBox
+          AnchorSideTop.Control = AnatDrop
+          AnchorSideTop.Side = asrBottom
+          Left = 214
+          Height = 52
+          Top = 215
+          Width = 203
+          Max = 600
+          Min = 100
+          Position = 100
+          TickStyle = tsNone
+          OnChange = SliceZoomChange
+          BorderSpacing.Left = 214
+          BorderSpacing.Top = 7
+          ParentFont = False
+          TabOrder = 11
+        end
+        object ZoomBtn: TButton
+          AnchorSideLeft.Control = SliceBox
+          AnchorSideTop.Control = SliceZoom
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 44
+          Hint = 'Slider adjusts scale factor. Control-drag to pan image. Click here to restore defaults.'
+          Top = 219
+          Width = 140
+          BorderSpacing.Left = 4
+          Caption = 'Zoom'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 10
+          OnClick = ZoomBtnClick
+        end
+        object Smooth2DCheck: TCheckBox
+          AnchorSideLeft.Control = SliceBox
+          AnchorSideTop.Control = SliceZoom
+          AnchorSideTop.Side = asrBottom
+          Left = 4
+          Height = 32
+          Hint = 'Do enlarged images appear blurry or jagged'
+          Top = 274
+          Width = 107
+          BorderSpacing.Left = 4
+          BorderSpacing.Top = 7
+          Caption = 'Smooth'
+          Checked = True
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          State = cbChecked
+          TabOrder = 12
+          OnChange = SmoothCheckChange
+        end
+        object RulerCheck: TCheckBox
+          AnchorSideLeft.Control = Smooth2DCheck
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Smooth2DCheck
+          AnchorSideTop.Side = asrCenter
+          Left = 121
+          Height = 32
+          Hint = 'Show Ruler (10 cm)'
+          Top = 274
+          Width = 81
+          BorderSpacing.Left = 10
+          BorderSpacing.Top = 7
+          Caption = 'Ruler'
+          Checked = True
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          State = cbChecked
+          TabOrder = 13
+          OnChange = RulerCheckChange
+        end
+      end
+      object CutoutBox: TGroupBox
+        Left = 0
+        Height = 201
+        Top = 1041
+        Width = 420
+        Align = alTop
+        AutoSize = True
+        Caption = 'Cutout'
+        ClientHeight = 168
+        ClientWidth = 416
+        Constraints.MinWidth = 18
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 4
+        object XLabel: TLabel
+          AnchorSideLeft.Control = CutoutBox
+          AnchorSideTop.Control = XTrackBar
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 16
+          Width = 14
+          BorderSpacing.Left = 4
+          Caption = 'X'
+          ParentFont = False
+        end
+        object XTrackBar: TTrackBar
+          AnchorSideLeft.Control = XLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = CutoutBox
+          Left = 22
+          Height = 52
+          Top = 4
+          Width = 133
+          Max = 1000
+          Position = 1000
+          TickStyle = tsNone
+          BorderSpacing.Left = 4
+          BorderSpacing.Top = 4
+          ParentFont = False
+          TabOrder = 0
+          OnMouseUp = CutoutMouseUp
+        end
+        object X2TrackBar: TTrackBar
+          AnchorSideLeft.Control = XTrackBar
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = XTrackBar
+          AnchorSideTop.Side = asrCenter
+          Left = 159
+          Height = 52
+          Top = 4
+          Width = 133
+          Max = 1000
+          Position = 1000
+          TickStyle = tsNone
+          BorderSpacing.Left = 4
+          ParentFont = False
+          TabOrder = 1
+          OnMouseUp = CutoutMouseUp
+        end
+        object YLabel: TLabel
+          AnchorSideLeft.Control = CutoutBox
+          AnchorSideTop.Control = YTrackBar
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 72
+          Width = 13
+          BorderSpacing.Left = 4
+          Caption = 'Y'
+          ParentFont = False
+        end
+        object YTrackBar: TTrackBar
+          AnchorSideLeft.Control = XTrackBar
+          AnchorSideTop.Control = XTrackBar
+          AnchorSideTop.Side = asrBottom
+          Left = 22
+          Height = 52
+          Top = 60
+          Width = 133
+          Max = 1000
+          Position = 1000
+          TickStyle = tsNone
+          BorderSpacing.Top = 4
+          ParentFont = False
+          TabOrder = 2
+          OnMouseUp = CutoutMouseUp
+        end
+        object Y2TrackBar: TTrackBar
+          AnchorSideLeft.Control = YTrackBar
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = YTrackBar
+          AnchorSideTop.Side = asrCenter
+          Left = 159
+          Height = 52
+          Top = 60
+          Width = 133
+          Max = 1000
+          Position = 984
+          TickStyle = tsNone
+          BorderSpacing.Left = 4
+          ParentFont = False
+          TabOrder = 3
+          OnMouseUp = CutoutMouseUp
+        end
+        object ZLabel: TLabel
+          AnchorSideLeft.Control = CutoutBox
+          AnchorSideTop.Control = ZTrackBar
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 128
+          Width = 13
+          BorderSpacing.Left = 4
+          Caption = 'Z'
+          ParentFont = False
+        end
+        object ZTrackBar: TTrackBar
+          AnchorSideLeft.Control = XTrackBar
+          AnchorSideTop.Control = YTrackBar
+          AnchorSideTop.Side = asrBottom
+          Left = 22
+          Height = 52
+          Top = 116
+          Width = 133
+          Max = 1000
+          Position = 1000
+          TickStyle = tsNone
+          BorderSpacing.Top = 4
+          ParentFont = False
+          TabOrder = 4
+          OnMouseUp = CutoutMouseUp
+        end
+        object Z2TrackBar: TTrackBar
+          AnchorSideLeft.Control = ZTrackBar
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = ZTrackBar
+          AnchorSideTop.Side = asrCenter
+          Left = 159
+          Height = 52
+          Top = 116
+          Width = 133
+          Max = 1000
+          Position = 998
+          TickStyle = tsNone
+          BorderSpacing.Left = 4
+          ParentFont = False
+          TabOrder = 5
+          OnMouseUp = CutoutMouseUp
+        end
+        object CutNearBtn: TButton
+          AnchorSideLeft.Control = X2TrackBar
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = CutoutBox
+          Left = 296
+          Height = 44
+          Top = 7
+          Width = 119
+          BorderSpacing.Left = 4
+          BorderSpacing.Top = 7
+          Caption = 'Near'
+          ParentFont = False
+          TabOrder = 6
+          OnClick = CutNearBtnClick
+        end
+        object CutNoneBtn: TButton
+          AnchorSideLeft.Control = X2TrackBar
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = CutNearBtn
+          AnchorSideTop.Side = asrBottom
+          Left = 296
+          Height = 44
+          Top = 58
+          Width = 119
+          BorderSpacing.Left = 4
+          BorderSpacing.Top = 7
+          Caption = 'None'
+          ParentFont = False
+          TabOrder = 7
+          OnClick = CutNoneBtnClick
+        end
+      end
+      object MosaicBox: TGroupBox
+        Left = 0
+        Height = 317
+        Top = 724
+        Width = 420
+        Align = alTop
+        AutoSize = True
+        Caption = 'Mosaic'
+        ClientHeight = 284
+        ClientWidth = 416
+        Constraints.MinWidth = 18
+        ParentFont = False
+        TabOrder = 5
+        object MosColLabel: TLabel
+          AnchorSideLeft.Control = MosaicBox
+          AnchorSideTop.Control = MosColEdit
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 8
+          Width = 89
+          BorderSpacing.Left = 4
+          Caption = 'Columns'
+          ParentFont = False
+        end
+        object MosRowLabel: TLabel
+          AnchorSideLeft.Control = MosColLabel
+          AnchorSideTop.Control = MosRowEdit
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 48
+          Width = 54
+          Caption = 'Rows'
+          ParentFont = False
+          OnClick = MosRowLabelClick
+        end
+        object MosColEdit: TSpinEdit
+          AnchorSideLeft.Control = MosColLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = MosaicBox
+          Left = 97
+          Height = 36
+          Top = 4
+          Width = 140
+          BorderSpacing.Left = 4
+          BorderSpacing.Top = 4
+          MaxValue = 12
+          MinValue = 2
+          ParentFont = False
+          TabOrder = 0
+          Value = 4
+          OnChange = UpdateMosaic
+        end
+        object MosRowEdit: TSpinEdit
+          AnchorSideLeft.Control = MosColEdit
+          AnchorSideTop.Control = MosColEdit
+          AnchorSideTop.Side = asrBottom
+          Left = 97
+          Height = 36
+          Top = 44
+          Width = 140
+          BorderSpacing.Top = 4
+          MaxValue = 12
+          MinValue = 1
+          ParentFont = False
+          TabOrder = 2
+          Value = 2
+          OnChange = UpdateMosaic
+        end
+        object MosColOverlapTrack: TTrackBar
+          AnchorSideLeft.Control = MosColEdit
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = MosColEdit
+          AnchorSideTop.Side = asrCenter
+          Left = 241
+          Height = 52
+          Top = -4
+          Width = 161
+          Max = 9
+          Min = -9
+          Position = -1
+          TickStyle = tsNone
+          OnChange = UpdateMosaic
+          BorderSpacing.Left = 4
+          ParentFont = False
+          TabOrder = 1
+        end
+        object MosRowOverlapTrack: TTrackBar
+          AnchorSideLeft.Control = MosColEdit
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = MosRowEdit
+          AnchorSideTop.Side = asrCenter
+          Left = 241
+          Height = 52
+          Top = 36
+          Width = 161
+          Max = 9
+          Min = -9
+          Position = -1
+          TickStyle = tsNone
+          OnChange = UpdateMosaic
+          BorderSpacing.Left = 4
+          ParentFont = False
+          TabOrder = 3
+        end
+        object MosOrientLabel: TLabel
+          AnchorSideLeft.Control = MosColLabel
+          AnchorSideTop.Control = MosOrientDrop
+          AnchorSideTop.Side = asrCenter
+          Left = 4
+          Height = 28
+          Top = 96
+          Width = 116
+          Caption = 'Orientation'
+          ParentFont = False
+        end
+        object MosOrientDrop: TComboBox
+          AnchorSideLeft.Control = MosOrientLabel
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = MosRowOverlapTrack
+          AnchorSideTop.Side = asrBottom
+          Left = 124
+          Height = 36
+          Top = 92
+          Width = 175
+          BorderSpacing.Left = 4
+          BorderSpacing.Top = 4
+          ItemHeight = 28
+          ItemIndex = 0
+          Items.Strings = (
+            'Axial'
+            'Coronal'
+            'Sagittal+'
+            'Sagittal-'
+          )
+          ParentFont = False
+          Style = csDropDownList
+          TabOrder = 4
+          Text = 'Axial'
+          OnChange = UpdateMosaic
+        end
+        object MosCrossCheck: TCheckBox
+          AnchorSideLeft.Control = MosColLabel
+          AnchorSideTop.Control = MosOrientDrop
+          AnchorSideTop.Side = asrBottom
+          Left = 4
+          Height = 32
+          Top = 132
+          Width = 136
+          BorderSpacing.Top = 4
+          Caption = 'Cross Slice'
+          Checked = True
+          ParentFont = False
+          State = cbChecked
+          TabOrder = 5
+          OnChange = UpdateMosaic
+        end
+        object MosLabelCheck: TCheckBox
+          AnchorSideLeft.Control = MosCrossCheck
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = MosCrossCheck
+          AnchorSideTop.Side = asrCenter
+          Left = 158
+          Height = 32
+          Top = 132
+          Width = 145
+          BorderSpacing.Left = 18
+          Caption = 'Label Slices'
+          Checked = True
+          ParentFont = False
+          State = cbChecked
+          TabOrder = 6
+          OnChange = UpdateMosaic
+        end
+        object MosaicText: TMemo
+          AnchorSideLeft.Control = MosaicBox
+          AnchorSideTop.Control = MosCrossCheck
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = MosaicBox
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 116
+          Top = 168
+          Width = 416
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Top = 4
+          Constraints.MaxHeight = 116
+          ParentFont = False
+          TabOrder = 7
+          OnChange = MosaicTextChange
+        end
+      end
+      object GroupBox1: TGroupBox
+        Left = 0
+        Height = 350
+        Top = 1581
+        Width = 420
+        Align = alTop
+        Caption = 'Notes'
+        ClientHeight = 317
+        ClientWidth = 416
+        ParentFont = False
+        TabOrder = 6
+        object MemoComment: TMemo
+          Left = 0
+          Height = 268
+          Top = 0
+          Width = 416
+          Align = alClient
+          Lines.Strings = (
+            'MemoComment'
+          )
+          ScrollBars = ssAutoBoth
+          TabOrder = 0
+          OnChange = MemoCommentChange
+        end
+        object BtnSaveComment: TButton
+          Left = 0
+          Height = 49
+          Top = 268
+          Width = 416
+          Align = alBottom
+          Caption = 'Save Comment'
+          TabOrder = 1
+          OnClick = BtnSaveCommentClick
+        end
+      end
+      object GroupBox2: TGroupBox
+        Left = 0
+        Height = 184
+        Top = 1931
+        Width = 420
+        Align = alTop
+        Caption = 'Navigation'
+        ClientHeight = 151
+        ClientWidth = 416
+        TabOrder = 7
+        object BtnPrevPatient: TButton
+          Left = 5
+          Height = 44
+          Top = 9
+          Width = 192
+          Caption = '< Prev'
+          TabOrder = 0
+          OnClick = BtnPrevPatientClick
+        end
+        object BtnNextPatient: TButton
+          Left = 212
+          Height = 44
+          Top = 9
+          Width = 208
+          Caption = 'Next >'
+          TabOrder = 1
+          OnClick = BtnNextPatientClick
+        end
+        object SpinJumpIndex: TSpinEdit
+          Left = 217
+          Height = 36
+          Top = 88
+          Width = 191
+          MaxValue = 49
+          MinValue = 1
+          TabOrder = 2
+          Value = 1
+        end
+        object BtnJumpTo: TButton
+          Left = 5
+          Height = 44
+          Top = 82
+          Width = 200
+          Caption = 'Jump To >>'
+          TabOrder = 3
+          OnClick = BtnJumpToClick
+        end
+      end
+    end
+    object ScriptPanel: TPanel
+      Left = 2800
+      Height = 1836
+      Top = 1
+      Width = 4
+      Align = alRight
+      BevelOuter = bvNone
+      ClientHeight = 1836
+      ClientWidth = 4
+      Constraints.MinWidth = 4
+      ParentFont = False
+      TabOrder = 1
+      OnDblClick = ScriptPanelDblClick
+      object ScriptBox: TGroupBox
+        Left = -14
+        Height = 1836
+        Top = 0
+        Width = 18
+        Align = alClient
+        Caption = 'Scripting'
+        ClientHeight = 1803
+        ClientWidth = 14
+        Constraints.MinWidth = 18
+        ParentFont = False
+        TabOrder = 0
+        OnDblClick = ScriptPanelDblClick
+        object ScriptMemo: TMemo
+          Left = 0
+          Height = 1443
+          Top = 0
+          Width = 14
+          Align = alClient
+          BorderStyle = bsNone
+          Lines.Strings = (
+            'import gl'
+            'import sys'
+            'print(sys.version)'
+            'print(sys.path)'
+            'print(gl.version())'
+            'gl.resetdefaults()'
+            'gl.loadimage(''mni152'')'
+          )
+          ParentFont = False
+          ScrollBars = ssAutoBoth
+          TabOrder = 0
+          WantTabs = True
+          WordWrap = False
+          OnKeyUp = ScriptMemoKeyUp
+        end
+        object ScriptOutputMemo: TMemo
+          Left = 0
+          Height = 350
+          Top = 1453
+          Width = 14
+          Align = alBottom
+          BorderStyle = bsNone
+          Lines.Strings = (
+            ''
+          )
+          ParentFont = False
+          ReadOnly = True
+          ScrollBars = ssAutoBoth
+          TabOrder = 1
+          WordWrap = False
+        end
+        object ScriptSplitter: TSplitter
+          Cursor = crVSplit
+          Left = 0
+          Height = 10
+          Top = 1443
+          Width = 14
+          Align = alBottom
+          ResizeAnchor = akBottom
+        end
+      end
+    end
+    object LeftSplitter: TSplitter
+      Left = 451
+      Height = 1836
+      Top = 1
+      Width = 10
+    end
+    object RightSplitter: TSplitter
+      Left = 2790
+      Height = 1836
+      Top = 1
+      Width = 10
+      Align = alRight
+      ResizeAnchor = akRight
+    end
+    object CenterPanel: TPanel
+      Left = 461
+      Height = 1836
+      Top = 1
+      Width = 2329
+      Align = alClient
+      ParentFont = False
+      TabOrder = 4
+      OnClick = CenterPanelClick
+    end
+  end
+  object TBSplitter: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 10
+    Top = 1838
+    Width = 2805
+    Align = alBottom
+    MinSize = 4
+    ResizeAnchor = akBottom
+  end
+  object BottomPanel: TPanel
+    Left = 0
+    Height = 140
+    Top = 1848
+    Width = 2805
+    Align = alBottom
+    ClientHeight = 140
+    ClientWidth = 2805
+    ParentFont = False
+    TabOrder = 2
+    object ClusterGraphSplitter: TSplitter
+      Left = 2655
+      Height = 138
+      Top = 1
+      Width = 9
+      Align = alRight
+      MinSize = 6
+      ResizeAnchor = akRight
+    end
+    object GraphPanel: TPanel
+      Left = 2664
+      Height = 138
+      Top = 1
+      Width = 140
+      Align = alRight
+      Constraints.MinHeight = 10
+      Constraints.MinWidth = 14
+      ParentFont = False
+      PopupMenu = GraphPopUp
+      TabOrder = 1
+      OnResize = GraphPanelResize
+    end
+    object ClusterPanel: TPanel
+      Left = 1
+      Height = 138
+      Top = 1
+      Width = 2654
+      Align = alClient
+      Caption = 'Layer does not have clusters'
+      ClientHeight = 138
+      ClientWidth = 2654
+      Constraints.MinWidth = 4
+      ParentFont = False
+      TabOrder = 2
+      object ClusterView: TListView
+        Left = 1
+        Height = 136
+        Top = 1
+        Width = 2652
+        Align = alClient
+        AutoSort = False
+        AutoWidthLastColumn = True
+        BorderStyle = bsNone
+        Columns = <        
+          item
+            Caption = 'Index'
+            MaxWidth = 88
+            MinWidth = 88
+            Tag = 1
+            Visible = False
+            Width = 88
+          end        
+          item
+            Caption = 'Volume'
+            MaxWidth = 210
+            MinWidth = 140
+            Tag = 1
+            Width = 140
+          end        
+          item
+            Caption = 'Peak'
+            Tag = 1
+            Width = 140
+          end        
+          item
+            Alignment = taCenter
+            Caption = 'PeakXYZ'
+            MaxWidth = 315
+            MinWidth = 35
+            Tag = 2
+            Width = 210
+          end        
+          item
+            Caption = 'Peak Structure'
+            MaxWidth = 350
+            MinWidth = 35
+            Tag = 2
+            Width = 210
+          end        
+          item
+            Alignment = taCenter
+            Caption = 'XYZ'
+            MaxWidth = 315
+            MinWidth = 35
+            Width = 210
+          end        
+          item
+            Caption = 'Structure'
+            Width = 1742
+          end>
+        Constraints.MinWidth = 4
+        GridLines = True
+        ParentFont = False
+        PopupMenu = ClusterPopUp
+        ReadOnly = True
+        RowSelect = True
+        ScrollBars = ssAutoBoth
+        SortColumn = 0
+        SortType = stBoth
+        TabOrder = 0
+        ViewStyle = vsReport
+        OnColumnClick = ClusterViewColumnClick
+        OnCompare = ClusterViewCompare
+        OnMouseUp = ClusterViewMouseUp
+        OnSelectItem = ClusterViewSelectItem
+      end
+    end
+  end
+  object MainMenu: TMainMenu
+    Left = 896
+    Top = 28
+    object AppleMenu: TMenuItem
+      Caption = ''
+      object AboutMenu: TMenuItem
+        Caption = 'About'
+        OnClick = AboutMenuClick
+      end
+      object ApplePrefMenu: TMenuItem
+        Caption = 'Preferences'
+        OnClick = HelpPrefMenuClick
+      end
+    end
+    object FileMenu: TMenuItem
+      Caption = 'File'
+      object NewWindowMenu: TMenuItem
+        Caption = 'New Window'
+        OnClick = NewWindowMenuClick
+      end
+      object OpenMenu: TMenuItem
+        Caption = 'Open'
+        ShortCut = 16463
+        OnClick = OpenMenuClick
+      end
+      object OpenRecentMenu: TMenuItem
+        Caption = 'Open Recent'
+      end
+      object OpenStandardMenu: TMenuItem
+        Caption = 'Open Standard'
+      end
+      object OpenAFNIMenu: TMenuItem
+        Tag = 2
+        Caption = 'Open AFNI'
+        object AfniDirMenu: TMenuItem
+          Caption = 'Set AFNI Folder...'
+          OnClick = AfniDirMenuClick
+        end
+      end
+      object OpenFSLMenu: TMenuItem
+        Caption = 'Open FSL'
+        OnClick = OpenFSLMenuClick
+      end
+      object DicomDirMenu: TMenuItem
+        Caption = 'Open Recent DICOM'
+        OnClick = DicomDirMenuClick
+      end
+      object OpenAltasMenu: TMenuItem
+        Tag = 1
+        Caption = 'Add Atlas'
+      end
+      object AddOverlayMenu: TMenuItem
+        Caption = 'Add Overlay'
+        ShortCut = 16449
+        OnClick = AddOverlayMenuClick
+      end
+      object AddOverlayClusterMenu: TMenuItem
+        Caption = 'Add Overlay (Remove Small Clusters)'
+        Visible = False
+        OnClick = AddOverlayClusterMenuClick
+      end
+      object SaveMenu: TMenuItem
+        Caption = 'Save Bitmap'
+        OnClick = SaveMenuClick
+      end
+      object SaveNIfTIMenu: TMenuItem
+        Caption = 'Save Volume'
+        OnClick = SaveNIfTIMenuClick
+      end
+      object FileSepMenu: TMenuItem
+        Caption = '-'
+      end
+      object FileExitMenu: TMenuItem
+        Caption = 'Exit'
+        OnClick = FileExitMenuClick
+      end
+    end
+    object EditMenu: TMenuItem
+      Caption = 'Edit'
+      object EditCopyMenu: TMenuItem
+        Caption = 'Copy'
+        ShortCut = 16451
+        OnClick = EditCopyMenuClick
+      end
+      object EditPasteMenu: TMenuItem
+        Caption = 'Paste'
+        ShortCut = 16470
+        OnClick = EditPasteMenuClick
+      end
+      object StoreFMRIMenu: TMenuItem
+        Caption = 'Store FMRI Coordinates'
+        ShortCut = 4171
+        Visible = False
+        OnClick = StoreFMRIMenuClick
+      end
+    end
+    object ImportMenu: TMenuItem
+      Caption = 'Import'
+      object ImportDicomMenu: TMenuItem
+        Caption = 'Convert DICOM to NIfTI'
+        OnClick = ImportDicomMenuClick
+      end
+      object ImportTIFFMenu: TMenuItem
+        Caption = 'Convert TIFF to NIfTI'
+        OnClick = ImportTIFFMenuClick
+      end
+      object ImportTIFFFolderMenu: TMenuItem
+        Caption = 'Convert Folder of 2D TIFFs to NIfTI'
+        OnClick = ImportTIFFFolderMenuClick
+      end
+      object ToolsMenu: TMenuItem
+        Caption = 'Tools'
+        object ReorientMenu1: TMenuItem
+          Caption = 'Rotation'
+          OnClick = ReorientMenuClick
+        end
+        object ResizeMenu1: TMenuItem
+          Caption = 'Resize'
+          OnClick = ResizeMenuClick
+        end
+        object CropMenu1: TMenuItem
+          Caption = 'Crop'
+          OnClick = CropMenuClick
+        end
+      end
+    end
+    object DrawMenu: TMenuItem
+      Caption = 'Draw'
+      object DrawOpenMenu: TMenuItem
+        Caption = 'Open VOI'
+        OnClick = DrawOpenMenuClick
+      end
+      object DrawSaveMenu: TMenuItem
+        Caption = 'Save VOI'
+        ShortCut = 16467
+        OnClick = DrawSaveMenuClick
+      end
+      object DrawCloseMenu: TMenuItem
+        Caption = 'Close VOI'
+        OnClick = DrawCloseMenuClick
+      end
+      object DrawUndoMenu: TMenuItem
+        Caption = 'Undo Drawing'
+        ShortCut = 16469
+        OnClick = DrawUndoMenuClick
+      end
+      object DrawTransparencyMenu: TMenuItem
+        Caption = 'Transparency'
+        object DrawHideMenu: TMenuItem
+          AutoCheck = True
+          Caption = 'Hide/Unhide'
+          ShortCut = 16456
+          OnClick = DrawTransClick
+        end
+        object DrawTrans25Menu: TMenuItem
+          Tag = 25
+          AutoCheck = True
+          Caption = '25%'
+          GroupIndex = 152
+          RadioItem = True
+          OnClick = DrawTransClick
+        end
+        object DrawTrans50Menu: TMenuItem
+          Tag = 50
+          AutoCheck = True
+          Caption = '50%'
+          Checked = True
+          GroupIndex = 152
+          RadioItem = True
+          OnClick = DrawTransClick
+        end
+        object DrawTrans90Menu: TMenuItem
+          Tag = 90
+          AutoCheck = True
+          Caption = '90%'
+          GroupIndex = 152
+          RadioItem = True
+          OnClick = DrawTransClick
+        end
+      end
+      object DrawColorMenu: TMenuItem
+        Caption = 'Draw Color'
+        object DrawNoneMenu: TMenuItem
+          Tag = -1
+          AutoCheck = True
+          Caption = 'None (Draw Mode Off)'
+          Checked = True
+          GroupIndex = 189
+          RadioItem = True
+          ShortCut = 16452
+          OnClick = DrawTool1Click
+        end
+        object DrawEraseMenu: TMenuItem
+          AutoCheck = True
+          Caption = 'Erase'
+          GroupIndex = 189
+          RadioItem = True
+          ShortCut = 16453
+          OnClick = DrawTool1Click
+        end
+        object DrawRedMenu: TMenuItem
+          Tag = 1
+          AutoCheck = True
+          Caption = 'Red'
+          GroupIndex = 189
+          RadioItem = True
+          ShortCut = 16433
+          OnClick = DrawTool1Click
+        end
+        object DrawGreenMenu: TMenuItem
+          Tag = 2
+          AutoCheck = True
+          Caption = 'Green'
+          GroupIndex = 189
+          RadioItem = True
+          ShortCut = 16434
+          OnClick = DrawTool1Click
+        end
+        object DrawBlueMenu: TMenuItem
+          Tag = 3
+          AutoCheck = True
+          Caption = 'Blue'
+          GroupIndex = 189
+          RadioItem = True
+          ShortCut = 16435
+          OnClick = DrawTool1Click
+        end
+        object DrawHintsMenu: TMenuItem
+          Caption = 'Hints'
+          Visible = False
+          OnClick = DrawHintsMenuClick
+        end
+      end
+      object DrawAdvancedMenu: TMenuItem
+        Caption = 'Advanced'
+        object DrawOverwriteMenu: TMenuItem
+          AutoCheck = True
+          Caption = 'Overwrite Existing Colors'
+          Checked = True
+        end
+        object DrawFilledMenu: TMenuItem
+          AutoCheck = True
+          Caption = 'Pen Draws Filled Regions'
+          Checked = True
+          Hint = 'If unchecked, pen only draws border outline'
+        end
+        object DrawCloneMenu: TMenuItem
+          Caption = 'Clone Slice'
+          ShortCut = 16470
+          OnClick = DrawCloneMenuClick
+        end
+        object DrawSmoothMenu: TMenuItem
+          Caption = 'Smooth and Refine Drawing'
+          OnClick = DrawSmoothMenuClick
+        end
+        object DrawIntensityFilterMenu: TMenuItem
+          Caption = 'Intensity Filter'
+          OnClick = DrawIntensityFilterMenuClick
+        end
+        object DrawDilateMenu: TMenuItem
+          Caption = 'Dilate or Erode'
+          OnClick = DrawDilateMenuClick
+        end
+        object DrawAutomaticMenu: TMenuItem
+          Caption = 'Automatic Drawing'
+          OnClick = DrawAutomaticMenuClick
+        end
+        object DrawBinarizeMenu: TMenuItem
+          Caption = 'Binarize (make entire drawing red)'
+          OnClick = DrawBinarizeMenuClick
+        end
+        object DrawInterpolateMenu: TMenuItem
+          Caption = 'Interpolate Between Slices'
+          object DrawInterpolate2Menu: TMenuItem
+            Caption = 'Last two slices'
+            OnClick = InterpolateDrawMenuClick
+          end
+          object DrawInterpolateAxMenu: TMenuItem
+            Tag = 1
+            Caption = 'All axial gaps'
+            OnClick = InterpolateDrawMenuClick
+          end
+          object DrawInterpolateCorMenu: TMenuItem
+            Tag = 2
+            Caption = 'All coronal gaps'
+            OnClick = InterpolateDrawMenuClick
+          end
+          object DrawInterpolateSagMenu: TMenuItem
+            Tag = 3
+            Caption = 'All sagittal gaps'
+            OnClick = InterpolateDrawMenuClick
+          end
+        end
+        object MaskMenu: TMenuItem
+          Caption = 'Mask Image'
+          object MaskDeleteMenu: TMenuItem
+            Caption = 'Delete regions with VOI'
+            OnClick = MaskMenuClick
+          end
+          object MaskPreserveMenu: TMenuItem
+            Tag = 1
+            Caption = 'Preserve regions with VOI'
+            OnClick = MaskMenuClick
+          end
+        end
+        object CreateOverlapImageMenu: TMenuItem
+          Caption = 'Create Overlap Image'
+          OnClick = CreateOverlapImageMenuClick
+        end
+        object CreateSubtractionPlotMenu: TMenuItem
+          Caption = 'Subtraction Plots'
+          OnClick = CreateSubtractionPlotMenuClick
+        end
+        object DrawDescriptivesMenu: TMenuItem
+          Caption = 'Descriptives'
+          OnClick = DrawDescriptivesMenuClick
+        end
+      end
+    end
+    object GraphMenu: TMenuItem
+      Caption = 'Graph'
+      object GraphOpenMenu: TMenuItem
+        Caption = 'Open (Close Previous Graphs)'
+        OnClick = GraphOpenMenuClick
+      end
+      object GraphOpenAddMenu: TMenuItem
+        Tag = 1
+        Caption = 'Add (Keep Previous Graphs)'
+        OnClick = GraphOpenMenuClick
+      end
+      object IntensityHistogamMenu: TMenuItem
+        Caption = 'Intensity Histogram'
+        ShortCut = 16457
+        OnClick = IntensityHistogamMenuClick
+      end
+      object IntensityHistogamOptionsMenu: TMenuItem
+        Tag = 1
+        Caption = 'Intensity Histogram with Options'
+        OnClick = IntensityHistogamMenuClick
+      end
+      object GraphSaveMenu: TMenuItem
+        Caption = 'Save As Text'
+        OnClick = GraphSaveMenuClick
+      end
+      object GraphSaveBitmapMenu: TMenuItem
+        Caption = 'Save As Bitmap'
+        OnClick = GraphSaveBitmapMenuClick
+      end
+      object GraphDrawingMenu: TMenuItem
+        Caption = 'Show Intensity Under Drawing'
+        OnClick = GraphDrawingMenuClick
+      end
+      object GraphAddMenu: TMenuItem
+        Caption = 'Add (Hold) Current Position'
+        OnClick = GraphAddMenuClick
+      end
+      object GraphClearMenu: TMenuItem
+        Caption = 'Clear'
+        OnClick = GraphClearMenuClick
+      end
+      object GraphScalingMenu: TMenuItem
+        Caption = 'Scaling'
+        object GraphRawMenu: TMenuItem
+          AutoCheck = True
+          Caption = 'Raw'
+          Checked = True
+          GroupIndex = 211
+          RadioItem = True
+          OnClick = GraphScaleClick
+        end
+        object GraphDemeanMenu: TMenuItem
+          Tag = 1
+          AutoCheck = True
+          Caption = 'Demeaned'
+          GroupIndex = 211
+          RadioItem = True
+          OnClick = GraphScaleClick
+        end
+        object GraphNormalizeMenu: TMenuItem
+          Tag = 2
+          AutoCheck = True
+          Caption = 'Normalize (-1..1)'
+          GroupIndex = 211
+          RadioItem = True
+          OnClick = GraphScaleClick
+        end
+        object GraphNormalize01Menu: TMenuItem
+          Tag = 3
+          AutoCheck = True
+          Caption = 'Normalize (0..1)'
+          GroupIndex = 211
+          RadioItem = True
+          OnClick = GraphScaleClick
+        end
+        object GraphPercentMenu: TMenuItem
+          Tag = 4
+          AutoCheck = True
+          Caption = 'Percent Signal'
+          GroupIndex = 211
+          RadioItem = True
+          OnClick = GraphScaleClick
+        end
+        object GraphSqrtMenu: TMenuItem
+          Tag = 5
+          AutoCheck = True
+          Caption = 'Square Root'
+          GroupIndex = 211
+          RadioItem = True
+          OnClick = GraphScaleClick
+        end
+        object GraphLognMenu: TMenuItem
+          Tag = 6
+          AutoCheck = True
+          Caption = 'Log (ln)'
+          GroupIndex = 211
+          RadioItem = True
+          OnClick = GraphScaleClick
+        end
+        object GraphLog10Menu: TMenuItem
+          Tag = 7
+          AutoCheck = True
+          Caption = 'Log 10'
+          GroupIndex = 211
+          RadioItem = True
+          OnClick = GraphScaleClick
+        end
+      end
+      object GraphMarkerMenu: TMenuItem
+        AutoCheck = True
+        Caption = 'Show Markers'
+        OnClick = GraphMarkerMenuClick
+      end
+      object GraphShowHideMenu: TMenuItem
+        Caption = 'Show or Hide'
+        OnClick = GraphShowHideMenuClick
+      end
+    end
+    object LandmarkMenu: TMenuItem
+      Caption = 'Landmarks'
+      object LandmarkOpenMenu: TMenuItem
+        Caption = 'Open'
+        OnClick = AnatOpenBtnClick
+      end
+      object LandmarkSaveMenu: TMenuItem
+        Caption = 'Save'
+        OnClick = AnatSaveBtnClick
+      end
+      object LandmarkAddMenu: TMenuItem
+        Caption = 'Add'
+        ShortCut = 32955
+        OnClick = AnatAddBtnClick
+      end
+      object LandmarkUpdateMenu: TMenuItem
+        Caption = 'Update'
+        ShortCut = 32853
+        OnClick = AnatUpdateBtnClick
+      end
+      object LandmarkDeleteMenu: TMenuItem
+        Caption = 'Delete'
+        ShortCut = 32957
+        OnClick = AnatDeleteBtnClick
+      end
+      object LandmarkSelectNext: TMenuItem
+        Caption = 'Select Next'
+        ShortCut = 32816
+        OnClick = LandmarkSelectNextClick
+      end
+    end
+    object DisplayMenu: TMenuItem
+      Caption = 'Display'
+      object RenderMenu: TMenuItem
+        Tag = 64
+        AutoCheck = True
+        Caption = 'Render'
+        Checked = True
+        GroupIndex = 234
+        RadioItem = True
+        OnClick = DisplayMenuClick
+      end
+      object AxialMenu: TMenuItem
+        Tag = 1
+        AutoCheck = True
+        Caption = 'Axial'
+        GroupIndex = 234
+        RadioItem = True
+        OnClick = DisplayMenuClick
+      end
+      object CoronalMenu: TMenuItem
+        Tag = 2
+        AutoCheck = True
+        Caption = 'Coronal'
+        GroupIndex = 234
+        RadioItem = True
+        OnClick = DisplayMenuClick
+      end
+      object SagittalMenu: TMenuItem
+        Tag = 4
+        AutoCheck = True
+        Caption = 'Sagittal'
+        GroupIndex = 234
+        RadioItem = True
+        OnClick = DisplayMenuClick
+      end
+      object SagittalLMenu: TMenuItem
+        Tag = 8
+        AutoCheck = True
+        Caption = 'Sagittal (nose left)'
+        GroupIndex = 234
+        RadioItem = True
+        OnClick = DisplayMenuClick
+      end
+      object MPRMenu: TMenuItem
+        Tag = 16
+        AutoCheck = True
+        Caption = 'Multi-Planar (A+C+S)'
+        GroupIndex = 234
+        RadioItem = True
+        OnClick = DisplayMenuClick
+      end
+      object MPRLeftNoseMenu: TMenuItem
+        Tag = 20
+        AutoCheck = True
+        Caption = 'Multi-Planar (Left Nose)'
+        GroupIndex = 234
+        RadioItem = True
+        OnClick = DisplayMenuClick
+      end
+      object MPR4Menu: TMenuItem
+        Tag = 12
+        AutoCheck = True
+        Caption = 'Multi-Planar (A+C+S+R)'
+        GroupIndex = 234
+        RadioItem = True
+        OnClick = DisplayMenuClick
+      end
+      object MosaicMenu: TMenuItem
+        Tag = 32
+        AutoCheck = True
+        Caption = 'Mosaic'
+        GroupIndex = 234
+        RadioItem = True
+        OnClick = DisplayMenuClick
+      end
+      object DisplaySep: TMenuItem
+        Caption = '-'
+      end
+      object YokeMenu: TMenuItem
+        AutoCheck = True
+        Caption = 'Yoke'
+        ShortCut = 16473
+        OnClick = YokeMenuClick
+      end
+      object DisplaySep2: TMenuItem
+        Caption = '-'
+      end
+      object DisplayLeftMenu: TMenuItem
+        Caption = 'Left'
+        ShortCut = 32844
+        OnClick = DisplayViewMenu
+      end
+      object DisplayRightMenu: TMenuItem
+        Tag = 1
+        Caption = 'Right'
+        ShortCut = 32850
+        OnClick = DisplayViewMenu
+      end
+      object DisplayPosteriorMenu: TMenuItem
+        Tag = 2
+        Caption = 'Posterior'
+        ShortCut = 32848
+        OnClick = DisplayViewMenu
+      end
+      object DisplayAnteriorMenu: TMenuItem
+        Tag = 3
+        Caption = 'Anterior'
+        ShortCut = 32833
+        OnClick = DisplayViewMenu
+      end
+      object DisplayInferiorMenu: TMenuItem
+        Tag = 4
+        Caption = 'Inferior'
+        ShortCut = 32841
+        OnClick = DisplayViewMenu
+      end
+      object DisplaySuperiorMenu: TMenuItem
+        Tag = 5
+        Caption = 'Superior'
+        ShortCut = 32851
+        OnClick = DisplayViewMenu
+      end
+      object DisplaySep3: TMenuItem
+        Caption = '-'
+      end
+      object DisplayPrevMenu: TMenuItem
+        Caption = 'Previous Volume'
+        ShortCut = 32854
+        OnClick = DisplayNextMenuClick
+      end
+      object DisplayNextMenu: TMenuItem
+        Tag = 1
+        Caption = 'Next Volume'
+        ShortCut = 32846
+        OnClick = DisplayNextMenuClick
+      end
+      object DisplayAnimateMenu: TMenuItem
+        AutoCheck = True
+        Caption = 'Animate Volumes'
+        OnClick = DisplayAnimateMenuClick
+      end
+      object DisplayCorrelationR: TMenuItem
+        Caption = 'Seed Correlation (Pearson)'
+        OnClick = DisplayCorrelationRClick
+      end
+      object DisplayCorrelationZ: TMenuItem
+        Tag = 1
+        Caption = 'Seed Correlation (Fisher z'')'
+        Visible = False
+        OnClick = DisplayCorrelationRClick
+      end
+    end
+    object ViewMenu: TMenuItem
+      Caption = 'View'
+      object ResetDefaultsMenu: TMenuItem
+        Caption = 'Reset Defaults'
+        Hint = 'Reset defaults while holding the shift key to reset everything'
+        OnClick = ResetDefaultsClick
+      end
+      object SharpenMenu: TMenuItem
+        Caption = 'Sharpen'
+        OnClick = SharpenMenuClick
+      end
+      object SmoothMenu: TMenuItem
+        Caption = 'Smooth'
+        OnClick = SmoothMenuClick
+      end
+      object RemoveHazeMenu: TMenuItem
+        Caption = 'Remove Haze'
+        OnClick = RemoveHazeMenuClick
+      end
+      object RemoveHazeOptionsMenu: TMenuItem
+        Tag = 1
+        Caption = 'Remove Haze with Options'
+        OnClick = RemoveHazeMenuClick
+      end
+      object ExtractBrainMenu: TMenuItem
+        Caption = 'Extract Brain'
+        OnClick = ExtractBrainMenuClick
+      end
+      object TextAndCubeMenu: TMenuItem
+        AutoCheck = True
+        Caption = 'Text and Orientation Cube'
+        OnClick = TextAndCubeMenuClick
+      end
+      object ExitFullScreenMenu: TMenuItem
+        Caption = 'Exit Full Screen Mode'
+        Visible = False
+        OnClick = ExitFullScreenMenuClick
+      end
+    end
+    object ColorMenu: TMenuItem
+      Caption = 'Color'
+      object BackColorMenu: TMenuItem
+        Caption = 'Back Color'
+        OnClick = BackColorMenuClick
+      end
+      object ColorEditorMenu: TMenuItem
+        AutoCheck = True
+        Caption = 'Color Editor'
+        ShortCut = 16458
+        OnClick = ColorEditorMenuClick
+      end
+      object ClrbarMenu: TMenuItem
+        Caption = 'Colorbar'
+        object VisibleClrbarMenu: TMenuItem
+          AutoCheck = True
+          Caption = 'Visible'
+          Checked = True
+          OnClick = ClrbarVisibleClick
+        end
+        object ClrbarSep: TMenuItem
+          Caption = '-'
+        end
+        object WhiteClrbarMenu: TMenuItem
+          Tag = 1
+          AutoCheck = True
+          Caption = 'White'
+          GroupIndex = 193
+          RadioItem = True
+          OnClick = ClrbarMenuClick
+        end
+        object TransWhiteClrbarMenu: TMenuItem
+          Tag = 2
+          AutoCheck = True
+          Caption = 'Translucent White'
+          GroupIndex = 193
+          RadioItem = True
+          OnClick = ClrbarMenuClick
+        end
+        object BlackClrbarMenu: TMenuItem
+          Tag = 3
+          AutoCheck = True
+          Caption = 'Black'
+          GroupIndex = 193
+          RadioItem = True
+          OnClick = ClrbarMenuClick
+        end
+        object TransBlackClrbarMenu: TMenuItem
+          Tag = 4
+          AutoCheck = True
+          Caption = 'Translucent Black'
+          Checked = True
+          GroupIndex = 193
+          RadioItem = True
+          OnClick = ClrbarMenuClick
+        end
+      end
+    end
+    object ScriptingMenu: TMenuItem
+      Caption = 'Scripting'
+      object ScriptingNewMenu: TMenuItem
+        Caption = 'New'
+        ShortCut = 16462
+        OnClick = ScriptingNewMenuClick
+      end
+      object ScriptingOpenMenu: TMenuItem
+        Caption = 'Open...'
+        OnClick = ScriptingOpenMenuClick
+      end
+      object ScriptingTemplatesMenu: TMenuItem
+        Caption = 'Templates'
+      end
+      object ScriptingPyVersion: TMenuItem
+        Caption = 'Set Python Version'
+        Visible = False
+        OnClick = ScriptingPyVersionClick
+      end
+      object ScriptingRunMenu: TMenuItem
+        Caption = 'Run'
+        ShortCut = 16466
+        OnClick = ScriptingRunMenuClick
+      end
+      object ScriptingSaveMenu: TMenuItem
+        Caption = 'Save'
+        OnClick = ScriptingSaveMenuClick
+      end
+      object ScriptHaltMenu: TMenuItem
+        Caption = 'Halt'
+        Visible = False
+        OnClick = ScriptHaltMenuClick
+      end
+      object NimlMenu: TMenuItem
+        Caption = 'Load NIML'
+        Visible = False
+        OnClick = NimlMenuClick
+      end
+      object ScriptingSepMenu: TMenuItem
+        Caption = '-'
+        OnClick = ScriptingSepMenuClick
+      end
+    end
+    object HelpMenu: TMenuItem
+      Caption = 'Help'
+      object OnlineHelpMenu: TMenuItem
+        Caption = 'Online Help'
+        OnClick = OnlineHelpMenuClick
+      end
+      object HelpPrefMenu: TMenuItem
+        Caption = 'Preferences'
+        OnClick = HelpPrefMenuClick
+      end
+      object MenuItem1: TMenuItem
+        Caption = 'Mouse Gestures'
+        OnClick = MouseGesturesMenu
+      end
+      object HelpAboutMenu: TMenuItem
+        Caption = 'About'
+        OnClick = AboutMenuClick
+      end
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 532
+    Top = 28
+  end
+  object ColorDialog1: TColorDialog
+    Color = clBlack
+    CustomColors.Strings = (
+      'ColorA=000000'
+      'ColorB=000080'
+      'ColorC=008000'
+      'ColorD=008080'
+      'ColorE=800000'
+      'ColorF=800080'
+      'ColorG=808000'
+      'ColorH=808080'
+      'ColorI=C0C0C0'
+      'ColorJ=0000FF'
+      'ColorK=00FF00'
+      'ColorL=00FFFF'
+      'ColorM=FF0000'
+      'ColorN=FF00FF'
+      'ColorO=FFFF00'
+      'ColorP=FFFFFF'
+      'ColorQ=C0DCC0'
+      'ColorR=F0CAA6'
+      'ColorS=F0FBFF'
+      'ColorT=A4A0A0'
+    )
+    Left = 532
+    Top = 140
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.png'
+    Options = [ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
+    Left = 532
+    Top = 257
+  end
+  object UpdateTimer: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = UpdateTimerTimer
+    Left = 714
+    Top = 28
+  end
+  object LayerPopup: TPopupMenu
+    OnPopup = LayerPopupPopup
+    Left = 896
+    Top = 140
+    object LayerUpMenu: TMenuItem
+      Caption = 'Move Up'
+      OnClick = LayerUpDownClick
+    end
+    object LayerDownMenu: TMenuItem
+      Tag = 1
+      Caption = 'Move Down'
+      OnClick = LayerUpDownClick
+    end
+    object LayerShowHeaderMenu: TMenuItem
+      Caption = 'Show Header'
+      OnClick = LayerShowHeaderMenuClick
+    end
+    object LayerShowBidsMenu: TMenuItem
+      Caption = 'Show BIDS Sidecar'
+      OnClick = LayerShowBidsMenuClick
+    end
+    object LayerClusterMenu: TMenuItem
+      Caption = 'Generate Cluster Table'
+      OnClick = LayerClusterMenuClick
+    end
+    object LayerClusterOptsMenu: TMenuItem
+      Tag = 1
+      Caption = 'Generate Cluster Table with Options'
+      OnClick = LayerClusterMenuClick
+    end
+    object LayerClusterMeansMenu: TMenuItem
+      Tag = 2
+      Caption = 'Generate Table of Means'
+      OnClick = LayerClusterMenuClick
+    end
+    object RemoveSmallClusterMenu: TMenuItem
+      Caption = 'Remove Small Clusters'
+      OnClick = RemoveSmallClusterMenuClick
+    end
+    object LayerFindPeakMenu: TMenuItem
+      Caption = 'Find Nearest Cluster Peak'
+      OnClick = LayerFindPeakMenuClick
+    end
+    object LayerFromZeroMenu: TMenuItem
+      AutoCheck = True
+      Caption = 'Color Range From Zero'
+      OnClick = LayerFromZeroMenuClick
+    end
+    object LayerAdditiveMenu: TMenuItem
+      AutoCheck = True
+      Caption = 'Additive Overlay Blending'
+      OnClick = LayerAdditiveMenuClick
+    end
+    object LayerMaskWithBackgroundMenu: TMenuItem
+      AutoCheck = True
+      Caption = 'Mask with background'
+      OnClick = LayerMaskWithBackgroundMenuClick
+    end
+    object LayerExport8BitMenu: TMenuItem
+      Caption = 'Export as 8-bit'
+      OnClick = LayerExport8BitMenuClick
+    end
+    object LayerSmoothMenu: TMenuItem
+      AutoCheck = True
+      Caption = 'Load Smooth Overlays'
+      OnClick = LayerSmoothMenuClick
+    end
+    object LayerResetBrightnessMenu: TMenuItem
+      Caption = 'Reset Dark and Bright'
+      OnClick = LayerResetBrightnessMenuClick
+    end
+    object LayerCutoutMenu: TMenuItem
+      AutoCheck = True
+      Caption = 'Hidden By Cutout'
+      OnClick = AfniNextClick
+    end
+    object LayerZeroIntensityInvisibleMenu: TMenuItem
+      AutoCheck = True
+      Caption = 'Hide Voxels with Zero Intensity'
+      OnClick = LayerZeroIntensityInvisibleMenuClick
+    end
+    object LayerIsLabelMenu: TMenuItem
+      AutoCheck = True
+      Caption = 'Label Map (Indexed Atlas)'
+      GroupIndex = 193
+      Visible = False
+      OnClick = LayerIsLabelMenuClick
+    end
+    object LayerInvertColorMapMenu: TMenuItem
+      AutoCheck = True
+      Caption = 'Invert Color Map'
+      OnClick = LayerInvertColorMapMenuClick
+    end
+    object EdgeMenu2: TMenuItem
+      Caption = 'Find Edges'
+      OnClick = EdgeMenuClick
+    end
+    object LayerNextVolumeMenu: TMenuItem
+      Tag = 1
+      Caption = 'Next Volume'
+      OnClick = LayerVolumeChange
+    end
+    object LayerPrevVolumeMenu: TMenuItem
+      Caption = 'Previous Volume'
+      OnClick = LayerVolumeChange
+    end
+    object LayerCloseMenu: TMenuItem
+      Caption = 'Close'
+      OnClick = LayerCloseMenuClick
+    end
+  end
+  object ScriptOpenDialog: TOpenDialog
+    DefaultExt = '.py'
+    Filter = 'Python scripts|*.py'
+    Left = 532
+    Top = 378
+  end
+  object YokeTimer: TTimer
+    Enabled = False
+    Interval = 200
+    OnTimer = YokeTimerTimer
+    Left = 714
+    Top = 630
+  end
+  object AnimateTimer: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = AnimateTimerTimer
+    Left = 714
+    Top = 257
+  end
+  object LayerWidgetChangeTimer: TTimer
+    Enabled = False
+    Interval = 200
+    OnTimer = LayerWidgetChangeTimerTimer
+    Left = 714
+    Top = 140
+  end
+  object InvalidateTImer: TTimer
+    Enabled = False
+    Interval = 1
+    OnTimer = InvalidateTImerTimer
+    Left = 714
+    Top = 378
+  end
+  object BetterRenderTimer: TTimer
+    Enabled = False
+    Interval = 500
+    OnTimer = BetterRenderTimerTimer
+    Left = 714
+    Top = 504
+  end
+  object AfniPopup: TPopupMenu
+    OnPopup = LayerPopupPopup
+    Left = 896
+    Top = 257
+    object AfniDetailsMenu: TMenuItem
+      Caption = 'Details'
+      OnClick = AfniDetailsMenuClick
+    end
+    object AfniPMenu: TMenuItem
+      Caption = 'p Values'
+      OnClick = AfniPMenuClick
+    end
+    object AfniQMenu: TMenuItem
+      Caption = 'q Values (FDR)'
+      OnClick = AfniQMenuClick
+    end
+    object AfniPrevMenu: TMenuItem
+      Caption = 'Previous volume'
+      OnClick = DisplayNextMenuClick
+    end
+    object AfniNextMenu: TMenuItem
+      Tag = 1
+      Caption = 'Next Volume'
+      OnClick = DisplayNextMenuClick
+    end
+  end
+  object ClusterPopUp: TPopupMenu
+    Left = 896
+    Top = 378
+    object ClusterCopyMenu: TMenuItem
+      Caption = 'Copy table to clipboard'
+      OnClick = ClusterSaveClick
+    end
+    object ClusterSaveMenu: TMenuItem
+      Tag = 1
+      Caption = 'Save table to text'
+      OnClick = ClusterSaveClick
+    end
+  end
+  object GraphPopUp: TPopupMenu
+    Left = 896
+    Top = 511
+    object GraphSaveTxtMenu: TMenuItem
+      Caption = 'Save Graph as Text'
+      OnClick = GraphSaveMenuClick
+    end
+    object GraphSaveBmpMenu: TMenuItem
+      Caption = 'Save Graph As Bitmap'
+      OnClick = GraphSaveBitmapMenuClick
+    end
+  end
+end
